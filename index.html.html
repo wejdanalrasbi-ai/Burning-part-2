@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مختبر الاحتراق – العلوم للصف الثامن</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f0fa;--card:#fff;--ink:#2a1f3d;--mut:#665a7a;--bd:#2a1f3d;--sh:#2a1f3d;--rose:#d6455d;--pur:#7b4b9b;--amb:#f5b82e;--ok:#1f9d63;--bad:#d6455d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#181226;--card:#241a38;--ink:#f3eefb;--mut:#b4a8cb;--bd:#6b58a0;--sh:#0b0716}}
+:root[data-theme="dark"]{--bg:#181226;--card:#241a38;--ink:#f3eefb;--mut:#b4a8cb;--bd:#6b58a0;--sh:#0b0716}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 60px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 17px/1.85 Tajawal,Tahoma,sans-serif}
+h2,h3{font-family:Cairo,Tajawal,sans-serif;margin:0;line-height:1.4}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:10}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:var(--card);border-bottom:2px solid var(--bd);padding:8px 14px;display:flex;gap:12px;align-items:center}
+header b{font:900 16px Cairo;white-space:nowrap}
+.bar{flex:1;height:12px;border:2px solid var(--bd);border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(270deg,var(--amb),var(--rose));transition:width .5s}
+#stars{font-weight:700;white-space:nowrap;color:var(--rose)}
+main{max-width:780px;margin:0 auto;padding:14px 14px 120px}
+.scr{display:none}.scr.on{display:block;animation:inn .4s}
+@keyframes inn{from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:none}}
+.band{position:relative;overflow:hidden;color:#fff;border:2px solid var(--bd);border-radius:22px;box-shadow:0 6px 0 var(--sh);padding:22px 20px}
+.band h2{font-size:28px;font-weight:900;position:relative}
+.band p{margin:4px 0 0;position:relative;font-weight:700;font-size:16px}
+.band .no{position:absolute;left:10px;bottom:-34px;font:900 130px Cairo;opacity:.22;font-style:normal}
+.pan{background:var(--card);border:2px solid var(--bd);border-radius:18px;box-shadow:0 5px 0 var(--sh);padding:16px;margin:18px 0}
+.pan h3{font-size:19px;margin-bottom:6px;color:var(--pur)}
+.book{border-right:6px solid var(--amb);background:color-mix(in srgb,var(--amb) 18%,var(--card))}
+.pan p{margin:6px 0}
+.chips,.slots{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0;align-items:center;justify-content:center}
+.chip{padding:7px 15px;border-radius:14px;background:var(--card);border:2px solid var(--bd);box-shadow:0 3px 0 var(--sh);font:700 16px Tajawal;color:var(--ink);cursor:grab;user-select:none;touch-action:none}
+.chip.sel{background:color-mix(in srgb,var(--pur) 25%,var(--card));border-color:var(--pur)}
+.chip.done{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 22%,var(--card));cursor:default;box-shadow:none}
+.chip.drag{z-index:30;position:relative;box-shadow:0 10px 18px rgba(0,0,0,.3)}
+.shake{animation:sh .35s}
+@keyframes sh{25%{transform:translateX(7px)}75%{transform:translateX(-7px)}}
+.slot{min-width:110px;min-height:50px;border:2px dashed var(--mut);border-radius:14px;display:flex;align-items:center;justify-content:center;padding:4px;color:var(--mut);font-size:14px;gap:6px;flex-wrap:wrap;text-align:center}
+.slot.full{border:2px solid var(--ok)}
+.bins{display:flex;gap:8px}
+.bin{flex:1;min-width:0;min-height:110px;flex-direction:column;justify-content:flex-start;align-content:flex-start;font-weight:700;color:var(--pur)}
+.eq{direction:ltr}
+.op{font:900 26px Cairo;color:var(--rose)}
+.btn{background:var(--rose);color:#fff;border:2px solid var(--bd);border-radius:14px;box-shadow:0 4px 0 var(--sh);padding:9px 22px;font:900 17px Cairo;cursor:pointer;display:block;margin:12px auto}
+.btn:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--sh)}
+.btn:disabled{background:var(--card);color:var(--mut);cursor:not-allowed;box-shadow:none}
+.opts{display:grid;gap:8px;margin:10px 0}
+.opt{text-align:right;background:var(--card);border:2px solid var(--bd);border-radius:12px;box-shadow:0 3px 0 var(--sh);padding:9px 14px;font:500 16px Tajawal;color:var(--ink);cursor:pointer}
+.opt.ok{background:color-mix(in srgb,var(--ok) 25%,var(--card));border-color:var(--ok)}
+.opt.no{background:color-mix(in srgb,var(--bad) 18%,var(--card));border-color:var(--bad)}
+.fb{min-height:22px;font-weight:700}.fb.ok{color:var(--ok)}.fb.no{color:var(--bad)}
+.stage{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;margin:12px 0;padding:14px;background:var(--bg);border-radius:14px;direction:ltr}
+.mol{display:flex;gap:2px;align-items:center;transition:transform .8s}
+.at{border-radius:50%;display:inline-block;box-shadow:inset -4px -4px 0 rgba(0,0,0,.2)}
+.C{width:34px;height:34px;background:#6d7683}.O{width:34px;height:34px;background:#ff5e3a}.H{width:20px;height:20px;background:#5fb8f5}
+.thermo{width:24px;height:100px;border:3px solid var(--bd);border-radius:14px;position:relative;overflow:hidden}
+.thermo i{position:absolute;bottom:0;width:100%;height:15%;background:var(--rose);transition:height 2s}
+.en{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;opacity:0;transition:opacity 1s}
+.en.on{opacity:1}.en span{background:color-mix(in srgb,var(--rose) 18%,var(--card));border:2px solid var(--rose);padding:0 12px;border-radius:20px;font-weight:700;font-size:15px}
+.air{display:flex;height:26px;border:2px solid var(--bd);border-radius:10px;overflow:hidden;font-size:13px;font-weight:700;line-height:22px;text-align:center}
+.air i{font-style:normal}.air i:first-child{width:20%;background:var(--amb);color:#2a1f3d}.air i:last-child{flex:1;background:var(--bg)}
+.track{height:84px;background:var(--bg);border-radius:14px;display:flex;align-items:center;padding:0 12px;overflow:hidden}
+#rocket{display:inline-block;transition:transform 1.4s cubic-bezier(.2,.7,.3,1)}
+.seq{display:grid;gap:8px}
+.st{display:flex;gap:10px;align-items:center;text-align:right;background:var(--card);border:2px solid var(--bd);border-radius:12px;box-shadow:0 3px 0 var(--sh);padding:8px 12px;font:500 16px Tajawal;color:var(--ink);cursor:pointer}
+.st b{min-width:28px;height:28px;border-radius:50%;background:var(--mut);color:var(--card);display:grid;place-items:center;font-family:Cairo}
+.st.ok{border-color:var(--ok)}.st.ok b{background:var(--ok);color:#fff}
+.warn{border:2px solid var(--rose);background:color-mix(in srgb,var(--rose) 12%,var(--card));border-radius:12px;padding:8px 12px;font-size:15px;margin-top:10px}
+.mg{width:150px;height:14px;border-radius:8px;background:#b9c0c8}.mg.lit{animation:fz 1.4s forwards}
+@keyframes fz{0%{background:#b9c0c8}30%,70%{background:#fff;box-shadow:0 0 30px 18px #fff,0 0 70px 40px #ffe27a}100%{background:#eee;box-shadow:none;width:120px}}
+.q{border-top:2px dashed var(--bd);padding-top:10px;margin-top:12px}
+.q h3{font-size:17px;color:var(--ink)}.why{color:var(--ok);font-weight:700;display:none}
+.can{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border:2px solid var(--bd);border-radius:12px;margin:10px 0;opacity:.5}
+.can.on{opacity:1;border-color:var(--ok);background:color-mix(in srgb,var(--ok) 15%,var(--card))}
+.can b{font:900 22px Cairo;color:var(--ok)}
+.sum{background:var(--pur);color:#fff;border:2px solid var(--bd);border-radius:16px;padding:12px 18px;margin-top:14px}
+.sum li{margin:4px 0}.eqt{list-style:none;display:flex;gap:8px;direction:ltr;justify-content:flex-end;flex-wrap:wrap;font-weight:700}
+#final{text-align:center;font:900 22px Cairo;margin-top:14px;color:var(--rose)}
+#nav{position:fixed;bottom:0;inset-inline:0;z-index:12;background:var(--card);border-top:2px solid var(--bd);padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;align-items:center;justify-content:space-between}
+#nav .btn{margin:0;padding:8px 16px}
+#dots{display:flex;gap:6px}
+#dots i{width:26px;height:26px;border-radius:8px;border:2px solid var(--bd);display:grid;place-items:center;font:700 13px Cairo;font-style:normal;cursor:pointer;line-height:1}
+#dots i.vis{background:var(--amb);color:#2a1f3d}#dots i.cur{background:var(--rose);color:#fff}
+:focus-visible{outline:3px solid var(--pur);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><b>مختبر الاحتراق</b><div class="bar"><i id="pb"></i></div><span id="stars"></span></header>
+<main>
+
+<section class="scr" data-t="تمهيد"><div class="band"><i class="no">١</i><h2>المزيد حول الاحتراق</h2><p>الدرس ٥-٣ · تغيّرات المادة</p></div>
+<div class="pan"><h3>تذكّر: احتراق المغنيسيوم</h3>
+<p>في الدرس السابق أحرقنا شريط المغنيسيوم في الهواء فانطلق ضوء أبيض ساطع. ركّب معادلته اللفظية:</p>
+<div class="group" data-key="pred"><div class="slots eq"><div class="slot" data-a="mg">المتفاعل ١</div><span class="op">+</span><div class="slot" data-a="o">المتفاعل ٢</div><span class="op">→</span><div class="slot" data-a="mgo">الناتج</div></div>
+<div class="chips"><span class="chip" data-v="mgo">أكسيد المغنيسيوم</span><span class="chip" data-v="o">أكسجين</span><span class="chip" data-v="w">ماء</span><span class="chip" data-v="mg">المغنيسيوم</span></div></div>
+<div class="stage"><div class="mg" id="mg"></div></div><button class="btn" id="mgb" disabled>أشعل المغنيسيوم</button><div class="fb" id="mgt"></div></div>
+<div class="pan"><h3>سؤال الربط</h3><p>اليوم سنتعرف المزيد حول الاحتراق. ما القاسم المشترك بين كل أنواع الاحتراق؟</p>
+<div class="opts" data-pred="1" data-key="br"><button class="opt">تتحول المادة إلى ماء دائمًا</button><button class="opt" data-ok="1">تتحد المادة مع الأكسجين</button><button class="opt">لا يحدث تفاعل كيميائي</button></div><div class="fb"></div></div>
+<div class="pan"><h3>أهداف الدرس: أستطيع أن...</h3><ul><li>أستخدم معادلة لفظية لوصف التفاعل عند احتراق الفحم.</li><li>أستخدم معادلة لفظية لوصف التفاعل عند احتراق الهيدروجين.</li><li>أشرح لماذا يعتبر الاحتراق تفاعل أكسدة.</li></ul></div></section>
+
+<section class="scr" data-t="الوقود"><div class="band"><i class="no">٢</i><h2>الاحتراق والوقود</h2><p>أتعرّف الاحتراق والوقود</p></div>
+<div class="pan book"><p>عندما يحترق شيء ما فإنه يحدث تفاعل كيميائي. فالاحتراق عبارة عن تفاعل كيميائي تتحد فيه المادة مع الأكسجين.</p><p>تعرف المادة التي تتحد مع الأكسجين باسم <b>الوقود</b>. يعمل الوقود على تخزين الطاقة في شكل طاقة كيميائية.</p></div>
+<div class="pan"><h3>صنّف: وقود أم لا؟</h3><div class="group" data-key="fuel"><div class="bins"><div class="slot bin" data-bin="y">وقود</div><div class="slot bin" data-bin="n">ليس وقودًا</div></div>
+<div class="chips"><span class="chip" data-b="y">الكربون</span><span class="chip" data-b="n">الماء</span><span class="chip" data-b="y">الخشب</span><span class="chip" data-b="y">الفحم</span><span class="chip" data-b="n">الحجر</span><span class="chip" data-b="y">الغاز الطبيعي</span><span class="chip" data-b="y">النفط</span><span class="chip" data-b="n">الرمل</span></div></div></div>
+<div class="pan"><h3>ما المطلوب لكي يحدث الاحتراق؟</h3><div class="group" data-key="tri"><div class="slots"><div class="slot" data-a="fuel">وقود</div><div class="slot" data-a="o2">أكسجين</div><div class="slot" data-a="heat">طاقة لبدء التفاعل</div></div>
+<div class="chips"><span class="chip" data-v="water">ماء</span><span class="chip" data-v="o2">أكسجين</span><span class="chip" data-v="stone">حجر</span><span class="chip" data-v="heat">شرارة أو حرارة</span><span class="chip" data-v="fuel">وقود</span></div></div></div></section>
+
+<section class="scr" data-t="الطاقة"><div class="band"><i class="no">٣</i><h2>الطاقة في الاحتراق</h2><p>أين تذهب الطاقة الكيميائية؟</p></div>
+<div class="pan book"><p>في الصف السابع تعرّفت على أنواع الطاقة المختلفة وكيف تتغير الطاقة من شكل لآخر. وفي تفاعلات الاحتراق تحدث تغيّرات في الطاقة.</p><p>عند احتراق الوقود كالفحم النباتي للطهي أو للتدفئة تنطلق الطاقة الحرارية (تتحرّر). وتتحول الطاقة الكيميائية في الوقود إلى طاقة حرارية وطاقة ضوئية، وفي بعض الأحيان إلى طاقة صوتية.</p></div>
+<div class="pan"><h3>ما نوع الطاقة؟</h3><p>صنّف كل ملاحظة حسب نوع الطاقة المنطلقة:</p><div class="group" data-key="en"><div class="bins"><div class="slot bin" data-bin="h">حرارية</div><div class="slot bin" data-bin="l">ضوئية</div><div class="slot bin" data-bin="s">صوتية</div></div>
+<div class="chips"><span class="chip" data-b="s">سماع صوت النار</span><span class="chip" data-b="h">الإحساس بالدفء</span><span class="chip" data-b="l">توهّج اللهب</span><span class="chip" data-b="h">ارتفاع درجة الحرارة</span></div></div></div></section>
+
+<section class="scr" data-t="الفحم"><div class="band"><i class="no">٤</i><h2>احتراق الفحم</h2><p>أستخدم معادلة لفظية لوصف احتراق الفحم</p></div>
+<div class="pan book"><p>فيما يلي معادلة لفظية للتفاعل الذي يحدث عند احتراق الفحم. فالفحم النباتي شكل من أشكال الكربون.</p></div>
+<div class="pan"><h3>ركّب المعادلة</h3><div class="group" data-key="coal"><div class="slots eq"><div class="slot" data-a="c">المتفاعل ١</div><span class="op">+</span><div class="slot" data-a="o">المتفاعل ٢</div><span class="op">→</span><div class="slot" data-a="co2">الناتج</div></div>
+<div class="chips"><span class="chip" data-v="c">الكربون</span><span class="chip" data-v="h">هيدروجين</span><span class="chip" data-v="o">أكسجين</span><span class="chip" data-v="co2">ثاني أكسيد الكربون</span></div></div></div>
+<div class="pan"><h3>داخل الهواء</h3><p>الأكسجين يمثل نحو ٢٠٪ من الهواء المحيط بنا. ويوجد في جزيئات، كل منها من ذرتي أكسجين مرتبطتين ببعضهما.</p><div class="air"><i>أكسجين ٢٠٪</i><i>غازات أخرى</i></div>
+<p><b>توقّع:</b> ماذا يحدث لدرجة الحرارة عند الاحتراق؟</p><div class="opts" data-pred="1" data-key="pt"><button class="opt" data-ok="1">ترتفع</button><button class="opt">تنخفض</button><button class="opt">تبقى ثابتة</button></div><div class="fb"></div>
+<div class="stage"><div class="mol"><i class="at C"></i></div><span class="op">+</span><div class="mol"><i class="at O"></i><i class="at O"></i></div><span class="op">→</span><div class="mol" id="co2m"><i class="at O"></i><i class="at C"></i><i class="at O"></i></div><div class="thermo"><i id="th"></i></div></div>
+<button class="btn" id="burn" disabled>أشعل الفحم</button><div class="en" id="en1"><span>حرارية</span><span>ضوئية</span><span>صوتية</span></div>
+<p>تعيد ذرات الأكسجين والكربون ترتيب نفسها وتتكوّن روابط جديدة لتكوين جزيئات من ثاني أكسيد الكربون. وعند حدوث عملية إعادة الترتيب تنطلق الطاقة وترتفع درجة الحرارة.</p></div>
+<div class="pan"><h3>أسئلة الكتاب</h3><div id="q1"></div></div></section>
+
+<section class="scr" data-t="الهيدروجين"><div class="band"><i class="no">٥</i><h2>احتراق الهيدروجين</h2><p>أستخدم معادلة لفظية لوصف احتراق الهيدروجين</p></div>
+<div class="pan book"><p>يمكن استخدام الهيدروجين كوقود في النموذج الذي يشبه الصاروخ. احتراق الهيدروجين عبارة عن تفاعل طارد للحرارة. يتحد الهيدروجين والأكسجين لتكوين الماء.</p></div>
+<div class="pan"><h3>ركّب المعادلة</h3><div class="group" data-key="hyd"><div class="slots eq"><div class="slot" data-a="h">المتفاعل ١</div><span class="op">+</span><div class="slot" data-a="o">المتفاعل ٢</div><span class="op">→</span><div class="slot" data-a="w">الناتج</div></div>
+<div class="chips"><span class="chip" data-v="o">أكسجين</span><span class="chip" data-v="co2">ثاني أكسيد الكربون</span><span class="chip" data-v="h">هيدروجين</span><span class="chip" data-v="w">ماء</span></div></div>
+<div class="stage"><div class="mol"><i class="at H"></i><i class="at H"></i></div><span class="op">+</span><div class="mol"><i class="at O"></i><i class="at O"></i></div><span class="op">→</span><div class="mol"><i class="at H"></i><i class="at O"></i><i class="at H"></i></div></div>
+<p>عندما تعيد ذرات الهيدروجين والأكسجين ترتيب نفسها وتتحد سويًّا، تتحرّر الطاقة، وتتحول الطاقة الكيميائية إلى طاقة حركية وحرارية وصوتية وضوئية.</p></div>
+<div class="pan"><h3>تجربة صاروخ الهيدروجين: رتّب الخطوات</h3><div class="seq" data-key="seq">
+<button class="st" data-n="3"><b>؟</b>تتفاعل ذرات الهيدروجين والأكسجين معًا</button>
+<button class="st" data-n="1"><b>؟</b>تُملأ زجاجة بالهيدروجين والهواء وتُعلّق بخيط</button>
+<button class="st" data-n="5"><b>؟</b>تتحرك الزجاجة سريعًا بطول الخيط</button>
+<button class="st" data-n="2"><b>؟</b>الشرارة الساخنة تولّد الطاقة لبدء التفاعل</button>
+<button class="st" data-n="4"><b>؟</b>تُحرَّر طاقة كبيرة تدفع السدادة للخارج</button></div>
+<div class="track"><span id="rocket"><svg width="80" height="40" viewBox="0 0 76 38"><path d="M54 11 74 19 54 27z" fill="#ff5e3a"/><path d="M2 19 16 7h38v24H16z" fill="#e8edf4" stroke="#2a1f3d" stroke-width="2"/><path d="M46 7 58 1l-4 10zM46 31l12 6-4-10z" fill="#7b4b9b"/><circle cx="30" cy="19" r="5" fill="#1b9aaa"/></svg></span></div>
+<button class="btn" id="launch" disabled>أطلق صاروخ الزجاجة</button><div class="en" id="en2"><span>حركية</span><span>حرارية</span><span>صوتية</span><span>ضوئية</span></div>
+<div class="warn">السلامة: يجب إحكام تثبيت الصاروخ بالخيط وإبعاد الطلاب في حال تحرّكه سريعًا. التجربة يجريها المعلم.</div></div></section>
+
+<section class="scr" data-t="الأكسدة"><div class="band"><i class="no">٦</i><h2>تفاعلات الأكسدة</h2><p>أشرح لماذا يعتبر الاحتراق تفاعل أكسدة</p></div>
+<div class="pan book"><p>عند احتراق مادة فإنها تتحد مع الأكسجين وتكوّن مادة جديدة تعرف باسم <b>الأكسيد</b>. ويعرف أي تفاعل تتحد فيه المادة بالأكسجين باسم <b>تفاعل الأكسدة</b> (Oxidation Reaction)، والاحتراق هو من تفاعلات الأكسدة.</p><p>عندما يصدأ الحديد فإنه يتحد مع الأكسجين الموجود في الهواء مكوّنًا أكسيد الحديد. وعملية الصدأ أبطأ وأقل قوة من الاحتراق، لكنها تعدّ تفاعل أكسدة أيضًا.</p></div>
+<div class="pan"><h3>صنّف الأمثلة</h3><div class="group" data-key="ox"><div class="bins"><div class="slot bin" data-bin="y">تفاعل أكسدة</div><div class="slot bin" data-bin="n">ليس أكسدة</div></div>
+<div class="chips"><span class="chip" data-b="y">احتراق الفحم</span><span class="chip" data-b="y">صدأ الحديد</span><span class="chip" data-b="n">ذوبان الثلج</span><span class="chip" data-b="y">تفاعل النحاس مع الأكسجين</span><span class="chip" data-b="n">تبخّر الماء</span><span class="chip" data-b="y">احتراق الهيدروجين</span></div></div>
+<p><b>أكمل:</b> الاحتراق تفاعل أكسدة لأن المادة...</p><div class="opts" data-pred="1" data-key="why"><button class="opt">تذوب في الماء</button><button class="opt" data-ok="1">تتحد مع الأكسجين</button><button class="opt">تتبخر عند التسخين</button></div><div class="fb"></div></div>
+<div class="pan"><h3>أسئلة الكتاب</h3><div id="q2"></div></div></section>
+
+<section class="scr" data-t="الملخص"><div class="band"><i class="no">٧</i><h2>أستطيع أن...</h2><p>راجع ما أنجزته</p></div>
+<div class="pan"><div class="can" id="c1"><b>✓</b><span>أستخدم معادلة لفظية لوصف التفاعل الذي يحدث عند احتراق الفحم.</span></div>
+<div class="can" id="c2"><b>✓</b><span>أستخدم معادلة لفظية لوصف التفاعل الذي يحدث عند احتراق الهيدروجين.</span></div>
+<div class="can" id="c3"><b>✓</b><span>أشرح لماذا يعتبر الاحتراق تفاعل أكسدة.</span></div></div>
+<div class="sum"><b>ملخص</b><ul><li>الاحتراق عبارة عن تفاعل تتحد فيه المادة مع الأكسجين.</li><li>عندما تتحد المادة مع الأكسجين نقول حدثت عملية أكسدة.</li><li class="eqt"><span>الكربون</span><span>+</span><span>أكسجين</span><span>→</span><span>ثاني أكسيد الكربون</span></li><li class="eqt"><span>هيدروجين</span><span>+</span><span>أكسجين</span><span>→</span><span>ماء</span></li></ul></div>
+<div id="final"></div></section>
+</main>
+<nav id="nav"><button class="btn" id="pv">→ السابق</button><div id="dots"></div><button class="btn" id="nx">التالي ←</button></nav>
+<script>
+var $=function(s,r){return (r||document).querySelector(s)},got={},sel=null,TOTAL=document.querySelectorAll('[data-key]').length+6;
+var AR=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+function ar(n){return String(n).replace(/\d/g,function(d){return AR[d]})}
+$('#stars').textContent='★ ٠/'+ar(TOTAL);
+function shake(e){e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake')}
+function award(k){if(got[k])return;got[k]=1;var n=Object.keys(got).length;$('#stars').textContent='★ '+ar(n)+'/'+ar(TOTAL);$('#pb').style.width=(n/TOTAL*100)+'%';
+ if(got.coal)$('#c1').classList.add('on');if(got.hyd)$('#c2').classList.add('on');if(got.ox&&got.why)$('#c3').classList.add('on');
+ if(n==TOTAL)$('#final').textContent='أحسنت! أتقنت درس الاحتراق وأصبحت خبير أكسدة!'}
+function place(t,chip){
+ if(!chip||chip.classList.contains('done'))return;
+ if(t.dataset.a&&t.classList.contains('full'))return;
+ var ok=t.dataset.a?chip.dataset.v===t.dataset.a:chip.dataset.b===t.dataset.bin;
+ if(ok){chip.classList.remove('sel');chip.classList.add('done');t.appendChild(chip);t.classList.add('full');sel=null;check(t.closest('.group'))}
+ else{shake(chip);shake(t);chip.classList.remove('sel');sel=null}}
+function check(g){if(g.querySelectorAll('.chip:not(.done)[data-b]').length||g.querySelectorAll('.slot[data-a]:not(.full)').length)return;
+ var k=g.dataset.key;award(k);if(k=='pred')$('#mgb').disabled=false;if(k=='coal')$('#burn').disabled=false;if(k=='hyd')$('#launch').disabled=false}
+document.querySelectorAll('.chip').forEach(function(c){c.draggable=false;
+ c.addEventListener('click',function(){if(c.classList.contains('done'))return;document.querySelectorAll('.chip.sel').forEach(function(x){x.classList.remove('sel')});c.classList.add('sel');sel=c});
+ c.addEventListener('pointerdown',function(e){if(c.classList.contains('done'))return;var x0=e.clientX,y0=e.clientY,mv=false;
+  function mf(ev){var dx=ev.clientX-x0,dy=ev.clientY-y0;if(!mv&&Math.hypot(dx,dy)>8){mv=true;c.classList.add('drag')}if(mv)c.style.transform='translate('+dx+'px,'+dy+'px) scale(1.1)'}
+  function up(ev){document.removeEventListener('pointermove',mf);document.removeEventListener('pointerup',up);document.removeEventListener('pointercancel',up);
+   if(mv){c.style.transform='';c.classList.remove('drag');c.dataset.sup=1;setTimeout(function(){delete c.dataset.sup},150);
+    var el=document.elementFromPoint(ev.clientX,ev.clientY),s=el&&el.closest('.slot');if(s)place(s,c)}}
+  document.addEventListener('pointermove',mf);document.addEventListener('pointerup',up);document.addEventListener('pointercancel',up)});
+ c.addEventListener('click',function(e){if(c.dataset.sup)e.stopImmediatePropagation()},true)});
+document.querySelectorAll('.slot').forEach(function(s){s.addEventListener('click',function(){if(sel)place(s,sel)})});
+document.querySelectorAll('[data-pred]').forEach(function(box){box.querySelectorAll('.opt').forEach(function(b){b.addEventListener('click',function(){
+ if(box.dataset.done)return;var fb=box.nextElementSibling;
+ if(b.dataset.ok){box.dataset.done=1;b.classList.add('ok');fb.className='fb ok';fb.textContent='صحيح!';award(box.dataset.key)}
+ else{b.classList.add('no');fb.className='fb no';fb.textContent='حاول مرة أخرى'}})})});
+document.querySelectorAll('.seq').forEach(function(q){var nx=1;q.querySelectorAll('.st').forEach(function(b){b.onclick=function(){if(b.classList.contains('ok'))return;
+ if(+b.dataset.n==nx){b.classList.add('ok');b.firstChild.textContent=ar(nx);nx++;if(nx>5)award('seq')}else shake(b)}})});
+$('#mgb').onclick=function(){$('#mg').classList.add('lit');$('#mgt').className='fb ok';$('#mgt').textContent='ضوء ساطع: تحولت الطاقة الكيميائية إلى طاقة ضوئية.';this.disabled=true};
+$('#burn').onclick=function(){$('#th').style.height='95%';$('#en1').classList.add('on');$('#co2m').style.transform='scale(1.25)';this.disabled=true};
+$('#launch').onclick=function(){$('#rocket').style.transform='translateX(-'+Math.max(120,$('.track').clientWidth-120)+'px)';$('#en2').classList.add('on');this.disabled=true};
+var Q=[
+['١) ما المطلوب لكي يحدث الاحتراق؟',['وقود وماء وحرارة','وقود وأكسجين وطاقة لبدء التفاعل','أكسجين وحجر وهواء بارد'],1,'الوقود والأكسجين والطاقة لبدء التفاعل.'],
+['٢) ما الذي يحدث لدرجة الحرارة عند احتراق الفحم النباتي؟',['ترتفع درجة الحرارة','تنخفض درجة الحرارة','لا تتغير'],0,'ترتفع درجة الحرارة.'],
+['٣) لماذا يحدث ذلك؟',['بسبب امتصاص طاقة حرارية','بسبب انطلاق طاقة حرارية','بسبب اختفاء الأكسجين'],1,'بسبب انطلاق طاقة حرارية.'],
+['٤) ينتج الصدأ من تفاعل كيميائي، ما نوع التفاعل؟',['تفاعل تعادل','تفاعل أكسدة','تفاعل تبخّر'],1,'الصدأ عبارة عن تفاعل أكسدة.'],
+['٥) ما المركّب الذي يتكوّن عند تفاعل النحاس مع الأكسجين؟',['أكسيد الحديد','أكسيد النحاس','ثاني أكسيد الكربون'],1,'يتكوّن أكسيد النحاس.'],
+['٦) عند إحراق المغنيسيوم في الهواء، ما أنواع الطاقة التي تتحوّل إليها الطاقة الكيميائية؟',['طاقة ضوئية','طاقة مغناطيسية','طاقة وضع فقط'],0,'تتحول الطاقة الكيميائية إلى طاقة ضوئية.']];
+Q.forEach(function(q,i){var d=document.createElement('div');d.className='q';
+ d.innerHTML='<h3>'+q[0]+'</h3><div class="opts"></div><div class="why">'+q[3]+'</div>';var o=d.querySelector('.opts'),first=true,done=false;
+ q[1].forEach(function(t,j){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){if(done)return;
+  if(j==q[2]){done=true;b.classList.add('ok');d.querySelector('.why').style.display='block';if(first)award('q'+i)}else{b.classList.add('no');first=false}};o.appendChild(b)});
+ $(i<3?'#q1':'#q2').appendChild(d)});
+var S=[].slice.call(document.querySelectorAll('main>section')),cur=0,D=$('#dots'),P=[['#d6455d','#7b4b9b'],['#7b4b9b','#2f6fc9'],['#d97a00','#d6455d'],['#d6455d','#c9540a'],['#1b8aa8','#7b4b9b'],['#7b4b9b','#d6455d'],['#1f9d63','#1b8aa8']];
+S.forEach(function(s,i){$('.band',s).style.background='linear-gradient(135deg,'+P[i][0]+','+P[i][1]+')';var d=document.createElement('i');d.textContent=ar(i+1);d.title=s.dataset.t;d.onclick=function(){go(i)};D.appendChild(d)});
+function go(i){cur=Math.max(0,Math.min(S.length-1,i));S.forEach(function(s,j){s.classList.toggle('on',j==cur)});
+ [].forEach.call(D.children,function(d,j){d.classList.toggle('cur',j==cur);if(j<=cur)d.classList.add('vis')});
+ $('#pv').style.visibility=cur==0?'hidden':'visible';$('#nx').style.visibility=cur==S.length-1?'hidden':'visible';window.scrollTo(0,0)}
+$('#pv').onclick=function(){go(cur-1)};$('#nx').onclick=function(){go(cur+1)};go(0);
+</script>
+</body>
+</html>
